@@ -1,0 +1,36 @@
+class SelectedFiltersViewController: UIViewController UITableViewDataSource, UITableViewDelegate {
+
+	var selectedFilters: [Filter]
+
+	@IBOutlet var filtersTable: UITableView! // add table view button
+
+	// make table button the data source
+
+  	override func viewDidLoad() {
+    	super.viewDidLoad()
+    	filtersTable.editing = true // putting table always in editing mode
+  	}
+  
+  	func tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    	return selectedFilters.count
+  	}
+
+  	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    	let cell = tableView.dequeueReusableIdentifier("filterCell", forIndexPath: indexPath)
+    	cell.textLabel?.text = selectedFilters[indexPath.row].name
+    	return cell
+  	}
+  
+  	// make tableview the delegate 
+  
+  	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    	return true
+  	}
+  
+  	func tableView(tableView: UITableView, commitEditingStyle: UITableCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    	if (editingStyle == UITableCellEditingStyle.Delete) {
+      		filtersModel.filters. removeAtIndex(indexPath.row) // delete from the array
+      		filtersTable.reloadData() // reload table from updated array
+    	}
+  	}
+}
