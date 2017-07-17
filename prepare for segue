@@ -1,0 +1,9 @@
+
+func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  if segue.identifier == "toDetailtView" {
+   if let indexPath = tableView.indexPathForSelectedRow {
+    let destVC = segue.destination as! DetailsViewController
+    destVC.selectedRestaurant = restaurants[indexPath.row]
+    }
+   }
+  }
