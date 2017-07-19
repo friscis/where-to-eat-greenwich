@@ -1,0 +1,15 @@
+let allFilters = ...
+var selectedFilters: [String]()
+
+func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+ if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.none {
+  tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+  selectedFilters.append(allFilters[indexPath.row])
+ } 
+ else if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark {
+ tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+ selectedFilters.remove(at: selectedFilters.index(of: allFilters[indexPath.row]))
+ }
+ // perform segue
+ // pass selectedFilters
+}  
