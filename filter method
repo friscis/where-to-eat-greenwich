@@ -1,0 +1,12 @@
+func filter() -> [Restaurant] {
+  var tempList = restaurants
+  for fil in selectedFilters {
+    if fil.contains("$") {
+      tempList = tempList.filter() {$0.price == fil}
+    }
+    else {
+      tempList = tempList.filter() {$0.type.contains {$0 == fil}}
+    }
+  }
+  return tempList
+}
