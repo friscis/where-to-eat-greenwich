@@ -1,36 +1,31 @@
 class SelectedFiltersViewController: UIViewController UITableViewDataSource, UITableViewDelegate {
 
-	var selectedFilters: [Filter]
-
-	@IBOutlet var filtersTable: UITableView! // add table view button
-
-	// make table button the data source
+	let allFilters = ["","","",""]
+	var selectedFilters = [String]()
 
   	override func viewDidLoad() {
     	super.viewDidLoad()
-    	filtersTable.editing = true // putting table always in editing mode
   	}
   
   	func tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    	return selectedFilters.count
+    	return allFilters.count
   	}
 
   	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     	let cell = tableView.dequeueReusableIdentifier("filterCell", forIndexPath: indexPath)
-    	cell.textLabel?.text = selectedFilters[indexPath.row].name
+    	cell.textLabel?.text = allFilters[indexPath.row].name
     	return cell
   	}
   
-  	// make tableview the delegate 
-  
-  	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    	return true
-  	}
-  
-  	func tableView(tableView: UITableView, commitEditingStyle: UITableCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    	if (editingStyle == UITableCellEditingStyle.Delete) {
-      		filtersModel.filters. removeAtIndex(indexPath.row) // delete from the array
-      		filtersTable.reloadData() // reload table from updated array
-    	}
-  	}
+func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
+	if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.none {  
+		tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark  
+		selectedFilters.append(allFilters[indexPath.row]) 
+	}  
+	else if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark { 
+		tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none 
+		selectedFilters.remove(at: selectedFilters.index(of: allFilters[indexPath.row])) 
+	} 
+	// perform segue 
+	// pass selectedFilters}    
 }
