@@ -17,13 +17,7 @@ var menuShowing = false
 
 override func viewDidLoad() {
   super.viewDidLoad()  
-  menuView.layer.shadowOpacity = 1 
-  
-  if !selectedFilters.isEmpty() {
-    restaurants = filter()
-    restaurantsTable.reloadData()
-  }
-  
+  menuView.layer.shadowOpacity = 1  
 }
 
 func tableView: UITableView, numberOfRowsInSection section: Int) -> Int {    	
@@ -46,6 +40,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     selectedFilters.remove(at: selectedFilters.index(of: allFilters[indexPath.row]))
   } 
   restaurants = filters()
+  restaurantsTable.reloadData()
 }
 
 func filter() -> [Restaurant] {
