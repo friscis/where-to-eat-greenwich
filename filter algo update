@@ -15,23 +15,30 @@ func filter() -> [Restaurant] {
       typeFilters.append(fil)
     }
   }
-  for fil in typeFilters {
-    typeRes = typeRes + allRestaurants.filter() {$0.type.contains {$0.contains(fil)}}
+  tempList2 = allRestaurants //copy of all restaurants
+  
+  for type in typeFilters {
+	  tempList += tempList2.filter() {$0.type.contains {$0.contains(type)}}
   }
-  for fil in priceFilters {
-    priceRes = priceRes + allRestaurants.filter() {$0.price.character.count == fil.character.count}
+  tempList2 = tempList
+  tempList = []
+  for price in priceFilters {
+	  tempList += tempList2.filter() {$0.price.character.count == type.character.count}
   }
-  for fil in townFilters {
-    townRes = townRes + allRestaurants.filter() {$0.town.contains(fil)}
+  tempList2 = tempList
+  tempList = []
+  for town in townFilters {
+	  tempList += tempList2.filter() {$0.town.contains(town)}
   }
-  for res in allRestaurants {
-    if typeRes.contains(res) {
-      if priceRes.contains(res) {
-        if townRes.contains(res) {
-          tempList.append(res)
-        }
-      }
-    }
+  
+  
+  filteredList = []
+  for res in tempList {
+	  if !filteredList.contains(res) {
+		  filteredList.append(res)
+	  }
   }
+  
+  return filteredList
   return tempList
 }
