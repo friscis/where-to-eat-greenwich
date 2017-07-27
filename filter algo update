@@ -1,5 +1,4 @@
 func filter() -> [Restaurant] {
-
   var typeFilters = []
   var priceFilters = []
   var townFilters = []
@@ -16,7 +15,6 @@ func filter() -> [Restaurant] {
       typeFilters.append(fil)
     }
   }
-
   for fil in typeFilters {
     typeRes = typeRes + allRestaurants.filter() {$0.type.contains {$0.contains(fil)}}
   }
@@ -26,7 +24,6 @@ func filter() -> [Restaurant] {
   for fil in townFilters {
     townRes = townRes + allRestaurants.filter() {$0.town.contains(fil)}
   }
-
   for res in allRestaurants {
     if typeRes.contains(res) {
       if priceRes.contains(res) {
